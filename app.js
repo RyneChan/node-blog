@@ -51,14 +51,21 @@ app.use('/',require('./routers/main'));
 
 
 
-mongoose.content();
+mongoose.connect('mongodb://localhost:27018/blog',function(err){
+	if(err){
+		console.log('数据库连接失败')
+	}else{
+		console.log('数据库连接成功。')
+		// 监听http请求
+		app.listen(8181);
+	}
+});
 
 
 
 
 
-// 监听http请求
-app.listen(8181);
+
 
 // 用户发送http请求 ->url ->解析路由 ->找到匹配规则 ->指定绑定函数执行，返回对应内容给用户
 //public ->静态 ->直接读取指定目录的内容，返回给用户 ->动态  ->处理业务逻辑，加载模版，解析模版，返回给用户
