@@ -6,6 +6,8 @@ var express = require('express');
 var swig = require('swig');
 // 加载数据库模块
 var mongoose = require('mongoose');
+// 加载body-parser，用来处理post提交过来的数据
+var bodyParser = require('body-parser');
 // 创建app应用 => nodejs http.createSever();
 var app = express();
 
@@ -19,6 +21,10 @@ app.set('views','./views');
 app.set('view engine','html');
 // 在开发过程中，取消模版缓存
 swig.setDefaults({cache:false});
+
+
+// bodyParser设置
+app.use(bodyParser.urlencoded({extended:true}));
 
 // 设置静态文件托管
 // 单用户访问的url以/public开始，那么返回对应__dirname+'/public'下的文件
